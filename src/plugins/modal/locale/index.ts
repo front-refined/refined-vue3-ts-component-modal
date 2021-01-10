@@ -2,21 +2,21 @@ import { getCurrentInstance } from 'vue';
 import { IInstance } from '../modal.type';
 import defaultLang from './lang/zh-CN';
 
-export const t = (...args: any[]): string => {
+export const r = (...args: any[]): string => {
   const instance = getCurrentInstance() as IInstance;
   const _t = instance._hub.t;
   if (_t) return _t(...args);
 
   const [path] = args;
-  const array = path.split('.');
+  const arr = path.split('.');
   let current: any = defaultLang,
     value: string = '',
     key: string;
 
-  for (let i = 0, j = array.length; i < j; i++) {
-    key = array[i];
+  for (let i = 0, len = arr.length; i < len; i++) {
+    key = arr[i];
     value = current[key];
-    if (i === j - 1) return value;
+    if (i === len - 1) return value;
     if (!value) return '';
     current = value;
   }

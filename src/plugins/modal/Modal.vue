@@ -6,14 +6,14 @@
 
       <div class="mask"
            :style="style"
-           @click="maskClose&&handleCancel()"></div>
+           @click="maskClose&&!loading&&handleCancel()"></div>
       <div class="modal__main">
         <div class="modal__title line line--b">
-          <span>{{title||t('r.title')}}</span>
+          <span>{{title||r('r.title')}}</span>
           <span v-if="close"
-                :title="t('r.close')"
+                :title="r('r.close')"
                 class="close"
-                @click="handleCancel">✕</span>
+                @click="!loading&&handleCancel()">✕</span>
         </div>
         <div class="modal__content">
           <Content v-if="typeof content==='function'"
@@ -26,9 +26,9 @@
           <button :disabled="loading"
                   @click="handleConfirm">
             <span class="loading"
-                  v-if="loading"> ❍ </span>{{t('r.confirm')}}
+                  v-if="loading"> ❍ </span>{{r('r.confirm')}}
           </button>
-          <button @click="handleCancel">{{t('r.cancel')}}</button>
+          <button @click="!loading&&handleCancel()">{{r('r.cancel')}}</button>
         </div>
       </div>
     </div>
@@ -48,7 +48,7 @@ import {
 import Content from './Content';
 import config from './config';
 import { IContent, IInstance } from './modal.type';
-import { t } from './locale';
+import { r } from './locale';
 
 export default defineComponent({
   name: 'RModal',
@@ -87,7 +87,6 @@ export default defineComponent({
   emits: ['on-confirm', 'on-cancel', 'update:modelValue'],
 
   setup(props, ctx) {
-    console.log('props :>> ', props);
     const style = computed(() => ({ opacity: props.opacity }));
     let instance = getCurrentInstance() as IInstance;
     onBeforeMount(() => {
@@ -112,7 +111,7 @@ export default defineComponent({
       style,
       handleConfirm,
       handleCancel,
-      t
+      r
     };
   }
 });

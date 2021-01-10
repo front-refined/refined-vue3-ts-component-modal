@@ -15,6 +15,16 @@
     <button @click="handleShowModal3">显示弹框</button>
   </fieldset>
 
+  <fieldset>
+    <legend>演示-API调用弹框，使用 h 函数</legend>
+    <button @click="handleShowModal4">显示弹框</button>
+  </fieldset>
+
+  <fieldset>
+    <legend>演示-API调用弹框，使用 jsx 语法</legend>
+    <button @click="handleShowModal5">显示弹框</button>
+  </fieldset>
+
   <r-modal v-model="show"
            title="演示-提交表单"
            close
@@ -58,6 +68,7 @@ export default defineComponent({
       await sleep(1000);
       form.loading = false;
       show.value = false;
+      console.log('提交成功');
     };
 
     const lang = ref<string>(localStorage.getItem('lang') || 'zh-CN');
@@ -96,6 +107,7 @@ export default defineComponent({
     //#region 演示-API调用弹框，点击“确定”事件是异步事件
     const handleShowModal3 = () => {
       $modal.show({
+        title: '演示-API调用弹框',
         maskClose: true,
         opacity: 0.9,
         content: 'hello world ~',
@@ -103,6 +115,41 @@ export default defineComponent({
           console.log('点击确定 before');
           await sleep(2000);
           console.log('点击确定 after');
+        }
+      });
+    };
+    //#endregion
+
+    //#region 演示-API调用弹框，使用 h 函数
+    const handleShowModal4 = () => {
+      $modal.show({
+        title: '演示-API调用弹框',
+        content(h) {
+          return h(
+            'div',
+            {
+              style: 'color:red;',
+              onClick: ($event: Event) => console.log('clicked', $event.target)
+            },
+            'hello world ~'
+          );
+        }
+      });
+    };
+    //#endregion
+
+    //#region 演示-API调用弹框，使用 jsx 语法
+    const handleShowModal5 = () => {
+      $modal.show({
+        title: '演示-API调用弹框',
+        content(h) {
+          return (
+            <div
+              onClick={($event: Event) => console.log('clicked', $event.target)}
+            >
+              hello world ~
+            </div>
+          );
         }
       });
     };
@@ -117,7 +164,11 @@ export default defineComponent({
       lang,
       handleShowModal2,
 
-      handleShowModal3
+      handleShowModal3,
+
+      handleShowModal4,
+
+      handleShowModal5
     };
   }
 });

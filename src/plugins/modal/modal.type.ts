@@ -1,4 +1,4 @@
-import { ComponentInternalInstance, VNode } from 'vue';
+import { ComponentInternalInstance, VNode, h } from 'vue';
 
 export interface IConfig {
   style?: {
