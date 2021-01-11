@@ -1,11 +1,4 @@
-import { defineComponent, h } from 'vue';
-
-export default defineComponent({
-  name: 'Context',
-  props: {
-    render: { type: Function, default: () => {} }
-  },
-  setup(props) {
-    return () => props.render(h);
-  }
-});
+import { h } from 'vue';
+const Content = (props: { render: (h: any) => void }) => props.render(h);
+Content.props = ['render'];
+export default Content;

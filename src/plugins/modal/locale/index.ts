@@ -2,7 +2,7 @@ import { getCurrentInstance } from 'vue';
 import { IInstance } from '../modal.type';
 import defaultLang from './lang/zh-CN';
 
-export const r = (...args: any[]): string => {
+export const t = (...args: any[]): string => {
   const instance = getCurrentInstance() as IInstance;
   const _t = instance._hub.t;
   if (_t) return _t(...args);

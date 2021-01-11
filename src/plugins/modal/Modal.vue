@@ -3,15 +3,14 @@
             :disabled="!isTeleport">
     <div v-if="modelValue"
          class="modal">
-
       <div class="mask"
            :style="style"
            @click="maskClose&&!loading&&handleCancel()"></div>
       <div class="modal__main">
         <div class="modal__title line line--b">
-          <span>{{title||r('r.title')}}</span>
+          <span>{{title||t('r.title')}}</span>
           <span v-if="close"
-                :title="r('r.close')"
+                :title="t('r.close')"
                 class="close"
                 @click="!loading&&handleCancel()">✕</span>
         </div>
@@ -26,9 +25,9 @@
           <button :disabled="loading"
                   @click="handleConfirm">
             <span class="loading"
-                  v-if="loading"> ❍ </span>{{r('r.confirm')}}
+                  v-if="loading"> ❍ </span>{{t('r.confirm')}}
           </button>
-          <button @click="!loading&&handleCancel()">{{r('r.cancel')}}</button>
+          <button @click="!loading&&handleCancel()">{{t('r.cancel')}}</button>
         </div>
       </div>
     </div>
@@ -48,7 +47,7 @@ import {
 import Content from './Content';
 import config from './config';
 import { IContent, IInstance } from './modal.type';
-import { r } from './locale';
+import { t } from './locale';
 
 export default defineComponent({
   name: 'RModal',
@@ -63,7 +62,7 @@ export default defineComponent({
       default: ''
     },
     content: {
-      type: [String, Function] as PropType<IContent>,
+      type: [String, Function] as PropType<string | IContent>,
       default: '',
       require: true
     },
@@ -111,7 +110,7 @@ export default defineComponent({
       style,
       handleConfirm,
       handleCancel,
-      r
+      t
     };
   }
 });

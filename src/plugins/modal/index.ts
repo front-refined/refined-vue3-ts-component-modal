@@ -26,19 +26,10 @@ Modal.install = (app: App, options: IConfig = {}) => {
       document.body.appendChild(container);
 
       const { props, _hub } = instance;
-      Object.assign(props, {
-        isTeleport: false,
-        modelValue: true,
-        title,
-        content,
-        close,
-        maskClose,
-        opacity
-      });
 
       const _closeModal = () => {
         props.modelValue = false;
-        container.parentNode?.removeChild(container);
+        container.parentNode!.removeChild(container);
       };
 
       Object.assign(_hub, {
@@ -68,6 +59,16 @@ Modal.install = (app: App, options: IConfig = {}) => {
           onCancel && onCancel();
           _closeModal();
         }
+      });
+
+      Object.assign(props, {
+        isTeleport: false,
+        modelValue: true,
+        title,
+        content,
+        close,
+        maskClose,
+        opacity
       });
     }
   } as IModal;

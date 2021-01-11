@@ -4,7 +4,6 @@ import { IModal } from '@/plugins/modal/modal.type';
 declare global {
   interface IGlobalAPI {
     $modal: IModal;
-
     // 一些其他
     $request: any;
   }

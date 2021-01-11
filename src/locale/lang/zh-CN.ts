@@ -1,5 +1,5 @@
 export default {
-  Demo: {
-    xxx: 'xxx'
+  demo: {
+    test: '测试'
   }
 };
